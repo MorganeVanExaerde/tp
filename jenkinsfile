@@ -1,12 +1,12 @@
 node {
     def app
 
-    stage('Nom de l'étape : ') {
+    stage('Récupération des sources') {
         checkout scm
     }
 
-    stage('Nom de l'étape :') {
-        app = docker.build("atos06/ipiformation")
+    stage('Build de mon application') {
+        app = docker.build("MorganeVanExaerde/tp")
     }
 
     stage('Nom de l'étape') {
@@ -17,7 +17,7 @@ node {
         }
     }
 
-    stage('Nom de l'étape : ') {
+    stage('Livraison dans le dockerhub') {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("1.0")
